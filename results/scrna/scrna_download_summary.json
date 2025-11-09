@@ -1,0 +1,13 @@
+{
+  "n_cells": 2638,
+  "n_genes": 1838,
+  "obs_keys": [
+    "n_genes",
+    "percent_mito",
+    "n_counts",
+    "louvain"
+  ],
+  "var_keys": [
+    "n_cells"
+  ]
+}

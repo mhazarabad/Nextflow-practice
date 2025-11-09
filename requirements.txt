@@ -1,0 +1,11 @@
+anndata
+numpy
+pandas
+requests
+scanpy
+scipy
+statsmodels
+tqdm
+matplotlib
+seaborn
+

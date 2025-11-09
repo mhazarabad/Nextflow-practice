@@ -1,0 +1,11 @@
+{
+  "n_peaks_input": 800,
+  "n_genes_with_binding": 710,
+  "top_gene": {
+    "gene_id": "ENSG00000245532",
+    "gene_name": "NEAT1",
+    "n_peaks": 20,
+    "max_score": 750,
+    "mean_score": 483.2
+  }
+}

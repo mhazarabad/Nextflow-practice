@@ -1,0 +1,56 @@
+{
+  "n_clusters": 8,
+  "n_genes_profiled": 73,
+  "top_cluster_assignments": [
+    {
+      "gene_name": "ACADM",
+      "top_cluster": "Dendritic cells",
+      "top_cluster_mean": 0.30007439851760864
+    },
+    {
+      "gene_name": "ARF4",
+      "top_cluster": "Megakaryocytes",
+      "top_cluster_mean": 0.13205941021442413
+    },
+    {
+      "gene_name": "ARRDC3",
+      "top_cluster": "Megakaryocytes",
+      "top_cluster_mean": 0.3263572156429291
+    },
+    {
+      "gene_name": "BOLA1",
+      "top_cluster": "CD8 T cells",
+      "top_cluster_mean": 0.07747038453817368
+    },
+    {
+      "gene_name": "CBX5",
+      "top_cluster": "Dendritic cells",
+      "top_cluster_mean": 0.234701469540596
+    },
+    {
+      "gene_name": "CCDC174",
+      "top_cluster": "NK cells",
+      "top_cluster_mean": 0.21171604096889496
+    },
+    {
+      "gene_name": "CCT7",
+      "top_cluster": "NK cells",
+      "top_cluster_mean": 0.2555390000343323
+    },
+    {
+      "gene_name": "CHD2",
+      "top_cluster": "B cells",
+      "top_cluster_mean": 0.15563656389713287
+    },
+    {
+      "gene_name": "DDB2",
+      "top_cluster": "Megakaryocytes",
+      "top_cluster_mean": 0.17183707654476166
+    },
+    {
+      "gene_name": "EIF2B1",
+      "top_cluster": "Dendritic cells",
+      "top_cluster_mean": 0.3331757187843323
+    }
+  ]
+}

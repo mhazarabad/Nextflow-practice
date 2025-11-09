@@ -1,0 +1,8 @@
+sample_id	gsm	celltype	condition	donorid	age	collectiondate	diseasestatus	index	race	samplename	smoker	time_since_last_flare_(months)	time_since_steroid_dose	time_since_symptom_onset_(yrs)
+lib227	GSM1479439		Healthy Control	44	32	June 26 2012	Healthy Control	23	Hispanic	44_Monocytes	--	--	--	--
+lib238	GSM1479450		MS posttreatment	33	52	May 22 2012	MS posttreatment	10	White	33_Monocytes	Y	1	3 weeks, oral	1
+lib281	GSM1479493		MS posttreatment	46	36	June 29 2012	MS posttreatment	7	White	46_Monocytes	N	47	--	10
+lib289	GSM1479500		Healthy Control	20	29	January 25 2012	Healthy Control	2	White	20_Monocytes	--	--	--	--
+lib296	GSM1479507		Healthy Control	21	22	February 2 2012	Healthy Control	3	White	21_Monocytes	--	--	--	--
+lib310	GSM1479521		Healthy Control	53	30	August 21 2012	Healthy Control	18	White	53_Monocytes	--	--	--	--
+lib343	GSM1479554		MS posttreatment	56	35	August 24 2012	MS posttreatment	15	White	56_Monocytes	N	1	1 month, IV	0.5

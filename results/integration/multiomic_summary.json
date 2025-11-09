@@ -1,0 +1,259 @@
+{
+  "n_genes_integrated": 565,
+  "top_hits": [
+    {
+      "gene": "AC011747.7",
+      "gene_id": "ENSG00000235092",
+      "log2fc": 0.0,
+      "padj": 1.0,
+      "n_chip_peaks": 1,
+      "max_chip_score": 344.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "AC062029.1",
+      "gene_id": "ENSG00000234028",
+      "log2fc": 1.4114406511407795,
+      "padj": 0.7746180793636023,
+      "n_chip_peaks": 1,
+      "max_chip_score": 420.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "AC084018.1",
+      "gene_id": "ENSG00000212694",
+      "log2fc": -0.0874575375461858,
+      "padj": 0.9443504247961738,
+      "n_chip_peaks": 1,
+      "max_chip_score": 360.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "AC092159.2",
+      "gene_id": "ENSG00000233296",
+      "log2fc": -0.5842420537444419,
+      "padj": 0.7746180793636023,
+      "n_chip_peaks": 1,
+      "max_chip_score": 348.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "AC115618.1",
+      "gene_id": "ENSG00000204620",
+      "log2fc": -0.11545872429331,
+      "padj": 0.9443504247961738,
+      "n_chip_peaks": 1,
+      "max_chip_score": 316.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "ACADM",
+      "gene_id": "ENSG00000117054",
+      "log2fc": 0.1426593866032529,
+      "padj": 0.8632216326282464,
+      "n_chip_peaks": 1,
+      "max_chip_score": 393.0,
+      "scrna_top_cluster": "Dendritic cells",
+      "scrna_top_cluster_mean": 0.3000744
+    },
+    {
+      "gene": "ACPT",
+      "gene_id": "ENSG00000142513",
+      "log2fc": 0.4135998359402524,
+      "padj": 0.9443504247961738,
+      "n_chip_peaks": 1,
+      "max_chip_score": 300.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "ADM",
+      "gene_id": "ENSG00000148926",
+      "log2fc": 0.438484074891561,
+      "padj": 0.7746180793636023,
+      "n_chip_peaks": 1,
+      "max_chip_score": 379.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "AFG3L1P",
+      "gene_id": "ENSG00000223959",
+      "log2fc": 0.1903243542507273,
+      "padj": 0.7746180793636023,
+      "n_chip_peaks": 1,
+      "max_chip_score": 344.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "AHNAK",
+      "gene_id": "ENSG00000124942",
+      "log2fc": 0.1181698667707288,
+      "padj": 0.9443504247961738,
+      "n_chip_peaks": 1,
+      "max_chip_score": 318.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "AHNAK2",
+      "gene_id": "ENSG00000185567",
+      "log2fc": 0.0930373255005625,
+      "padj": 0.9443504247961738,
+      "n_chip_peaks": 1,
+      "max_chip_score": 343.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "AHRR",
+      "gene_id": "ENSG00000063438",
+      "log2fc": -1.3909791633420063,
+      "padj": 0.7746180793636023,
+      "n_chip_peaks": 1,
+      "max_chip_score": 343.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "ALDH1A2",
+      "gene_id": "ENSG00000128918",
+      "log2fc": -0.5846020522393589,
+      "padj": 0.7746180793636023,
+      "n_chip_peaks": 1,
+      "max_chip_score": 386.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "AMD1",
+      "gene_id": "ENSG00000123505",
+      "log2fc": 0.0101565370333223,
+      "padj": 0.9932017773414448,
+      "n_chip_peaks": 1,
+      "max_chip_score": 721.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "ANAPC15",
+      "gene_id": "ENSG00000110200",
+      "log2fc": -0.2114937514308636,
+      "padj": 0.7945718956647059,
+      "n_chip_peaks": 1,
+      "max_chip_score": 372.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "ANXA1",
+      "gene_id": "ENSG00000135046",
+      "log2fc": 0.097611492157023,
+      "padj": 0.9195812414210804,
+      "n_chip_peaks": 2,
+      "max_chip_score": 621.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "ANXA11",
+      "gene_id": "ENSG00000122359",
+      "log2fc": 0.1025769429733583,
+      "padj": 0.7746180793636023,
+      "n_chip_peaks": 1,
+      "max_chip_score": 299.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "ANXA2",
+      "gene_id": "ENSG00000182718",
+      "log2fc": 0.1886658706307699,
+      "padj": 0.7746180793636023,
+      "n_chip_peaks": 4,
+      "max_chip_score": 584.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "AP3S2",
+      "gene_id": "ENSG00000157823",
+      "log2fc": -0.1356496289037539,
+      "padj": 0.8530171092969747,
+      "n_chip_peaks": 1,
+      "max_chip_score": 308.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "ARF4",
+      "gene_id": "ENSG00000168374",
+      "log2fc": -0.0887751344437271,
+      "padj": 0.7746180793636023,
+      "n_chip_peaks": 1,
+      "max_chip_score": 313.0,
+      "scrna_top_cluster": "Megakaryocytes",
+      "scrna_top_cluster_mean": 0.13205941
+    },
+    {
+      "gene": "ARID3B",
+      "gene_id": "ENSG00000179361",
+      "log2fc": -0.0210611543182874,
+      "padj": 0.9640347973367605,
+      "n_chip_peaks": 1,
+      "max_chip_score": 297.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "ARL6IP1",
+      "gene_id": "ENSG00000170540",
+      "log2fc": -0.0327895624769243,
+      "padj": 0.955153293305998,
+      "n_chip_peaks": 1,
+      "max_chip_score": 410.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "ARRDC1",
+      "gene_id": "ENSG00000197070",
+      "log2fc": 0.1329729892079412,
+      "padj": 0.7746180793636023,
+      "n_chip_peaks": 1,
+      "max_chip_score": 314.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    },
+    {
+      "gene": "ARRDC3",
+      "gene_id": "ENSG00000113369",
+      "log2fc": 0.4068032486248923,
+      "padj": 0.7746180793636023,
+      "n_chip_peaks": 2,
+      "max_chip_score": 432.0,
+      "scrna_top_cluster": "Megakaryocytes",
+      "scrna_top_cluster_mean": 0.32635722
+    },
+    {
+      "gene": "ASH1L-AS1",
+      "gene_id": "ENSG00000235919",
+      "log2fc": -0.1698448895484144,
+      "padj": 0.9121525776082964,
+      "n_chip_peaks": 1,
+      "max_chip_score": 335.0,
+      "scrna_top_cluster": null,
+      "scrna_top_cluster_mean": null
+    }
+  ],
+  "figures": {
+    "heatmap": "multiomic_heatmap.png",
+    "chip_bar": "chip_target_bar.png"
+  }
+}

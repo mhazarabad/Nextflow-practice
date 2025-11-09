@@ -1,0 +1,13 @@
+{
+  "celltype": "Monocytes",
+  "conditions": [
+    "Healthy Control",
+    "MS posttreatment"
+  ],
+  "n_samples": 7,
+  "n_genes": 16154,
+  "samples_per_condition": {
+    "Healthy Control": 4,
+    "MS posttreatment": 3
+  }
+}

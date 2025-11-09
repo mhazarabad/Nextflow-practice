@@ -1,0 +1,8 @@
+{
+  "group_a": "Healthy Control",
+  "group_b": "MS posttreatment",
+  "n_genes_tested": 16154,
+  "n_significant": 42,
+  "padj_threshold": 0.1,
+  "min_log2fc": 0.5
+}
