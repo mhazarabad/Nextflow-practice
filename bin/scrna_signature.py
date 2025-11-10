@@ -1,28 +1,16 @@
-#!/usr/bin/env python3
-"""
-Summarise scRNA-seq expression of a gene set across clusters.
-"""
-
-from __future__ import annotations
-
 import argparse
-import json
-from pathlib import Path
-from typing import Iterable
-
 import anndata as ad
 import numpy as np
 import pandas as pd
 
 
-def main(argv: Iterable[str] | None = None) -> None:
+def main(argv = None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--adata", required=True, help="Path to .h5ad file.")
     parser.add_argument("--gene-table", required=True, help="Gene list TSV with gene_name column.")
     parser.add_argument("--cluster-key", default="louvain")
     parser.add_argument("--out-signature", required=True)
-    parser.add_argument("--summary-json", required=True)
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    args = parser.parse_args(argv)
 
     adata = ad.read_h5ad(args.adata)
     if args.cluster_key not in adata.obs.columns:
@@ -52,22 +40,4 @@ def main(argv: Iterable[str] | None = None) -> None:
     signature["median_expression"] = median_expr.stack().values
     signature.to_csv(args.out_signature, sep="\t", index=False)
 
-    # summarise top cluster per gene
-    top_clusters = (
-        signature.groupby("gene_name")
-        .apply(lambda x: x.sort_values("mean_expression", ascending=False).iloc[0][["cluster", "mean_expression"]])
-        .reset_index()
-        .rename(columns={"cluster": "top_cluster", "mean_expression": "top_cluster_mean"})
-    )
-
-    summary = {
-        "n_clusters": int(signature["cluster"].nunique()),
-        "n_genes_profiled": int(len(target_genes)),
-        "top_cluster_assignments": top_clusters.head(10).to_dict(orient="records"),
-    }
-    Path(args.summary_json).write_text(json.dumps(summary, indent=2))
-
-
-if __name__ == "__main__":
-    main()
-
+main()

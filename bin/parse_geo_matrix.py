@@ -1,26 +1,13 @@
-#!/usr/bin/env python3
-"""
-Download GEO RNA-seq normalized counts and sample metadata, then subset to a
-specific immune cell type and disease contrast.
-"""
-
-from __future__ import annotations
-
 import argparse
-import csv
 import gzip
-import json
-import re
-import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, Iterable, List, Tuple
-
+from typing import Dict, List, Tuple
 import pandas as pd
 import requests
 
 
-def _download(url: str, dest: Path) -> Path:
+def _download(url: str, dest: Path):
     dest.parent.mkdir(parents=True, exist_ok=True)
     if dest.exists():
         return dest
@@ -32,13 +19,10 @@ def _download(url: str, dest: Path) -> Path:
                     fh.write(chunk)
     return dest
 
-
-def _parse_series_matrix(path: Path) -> Dict[str, Dict[str, str]]:
+def _parse_series_matrix(path: Path):
     sample_titles: List[str] = []
     sample_gsms: List[str] = []
     characteristic_rows: List[List[str]] = []
-
-    line_pattern = re.compile(r'^"!?(.*?)"$')
 
     with gzip.open(path, "rt") as handle:
         for raw in handle:
@@ -77,8 +61,7 @@ def _parse_series_matrix(path: Path) -> Dict[str, Dict[str, str]]:
         metadata[sample["sample_id"]] = sample
     return metadata
 
-
-def _split_values(line: str) -> List[str]:
+def _split_values(line: str):
     parts = line.strip().split("\t")[1:]
     cleaned: List[str] = []
     for entry in parts:
@@ -86,8 +69,7 @@ def _split_values(line: str) -> List[str]:
         cleaned.append(entry)
     return cleaned
 
-
-def _load_expression(path: Path) -> pd.DataFrame:
+def _load_expression(path: Path):
     with gzip.open(path, "rt") as handle:
         df = pd.read_csv(handle, sep="\t")
     if "genenames" not in df.columns:
@@ -96,13 +78,12 @@ def _load_expression(path: Path) -> pd.DataFrame:
     df = df.set_index("gene_id")
     return df
 
-
 def _filter_expression(
     expression: pd.DataFrame,
     metadata: Dict[str, Dict[str, str]],
     celltype: str,
     include_conditions: Tuple[str, str],
-) -> Tuple[pd.DataFrame, pd.DataFrame]:
+):
     harmonized = {}
     for sample_id, attrs in metadata.items():
         if attrs.get("celltype", "").lower() != celltype.lower():
@@ -136,8 +117,7 @@ def _filter_expression(
     )
     return filtered_expression, metadata_df
 
-
-def main(argv: Iterable[str] | None = None) -> None:
+def main(argv = None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--matrix-url", required=True)
     parser.add_argument("--counts-url", required=True)
@@ -149,7 +129,6 @@ def main(argv: Iterable[str] | None = None) -> None:
     )
     parser.add_argument("--out-expression", required=True)
     parser.add_argument("--out-metadata", required=True)
-    parser.add_argument("--summary-json", required=True)
     parser.add_argument("--cache-dir", default="cache")
     args = parser.parse_args(list(argv) if argv is not None else None)
 
@@ -175,16 +154,4 @@ def main(argv: Iterable[str] | None = None) -> None:
     filtered_expression.to_csv(args.out_expression, sep="\t")
     metadata_df.to_csv(args.out_metadata, sep="\t", index=False)
 
-    summary = {
-        "celltype": args.celltype,
-        "conditions": list(condition_pairs),
-        "n_samples": int(metadata_df.shape[0]),
-        "n_genes": int(filtered_expression.shape[0]),
-        "samples_per_condition": metadata_df.groupby("condition")["sample_id"].count().to_dict(),
-    }
-    Path(args.summary_json).write_text(json.dumps(summary, indent=2))
-
-
-if __name__ == "__main__":
-    main()
-
+main()

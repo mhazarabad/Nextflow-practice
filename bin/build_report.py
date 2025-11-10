@@ -1,27 +1,17 @@
-#!/usr/bin/env python3
-"""
-Integrate bulk RNA-seq DEGs, ChIP targets, and scRNA signatures.
-"""
-
-from __future__ import annotations
-
 import argparse
-import json
 from pathlib import Path
 from typing import Iterable
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
 
-def main(argv: Iterable[str] | None = None) -> None:
+def main(argv = None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--deg", required=True)
     parser.add_argument("--chip-genes", required=True)
     parser.add_argument("--scrna-signature", required=True)
     parser.add_argument("--out-summary", required=True)
-    parser.add_argument("--out-json", required=True)
     parser.add_argument("--top-n", type=int, default=25)
     args = parser.parse_args(list(argv) if argv is not None else None)
 
@@ -49,46 +39,7 @@ def main(argv: Iterable[str] | None = None) -> None:
     _plot_heatmap(merged, heatmap_path)
     _plot_bar(merged, bar_path)
 
-    # build compact summary
-    condensed = []
-    for gene, group in merged.groupby("gene_name"):
-        top_row = group.iloc[0]
-        top_cluster = (
-            group.sort_values("mean_expression", ascending=False).iloc[0][
-                ["cluster", "mean_expression"]
-            ]
-            if group["mean_expression"].notna().any()
-            else {"cluster": None, "mean_expression": None}
-        )
-        condensed.append(
-            {
-                "gene": gene,
-                "gene_id": top_row["gene_id"],
-                "log2fc": float(top_row["log2fc"]),
-                "padj": float(top_row["padj"]),
-                "n_chip_peaks": int(top_row["n_peaks"]),
-                "max_chip_score": float(top_row["max_score"]),
-                "scrna_top_cluster": top_cluster.get("cluster"),
-                "scrna_top_cluster_mean": (
-                    float(top_cluster.get("mean_expression"))
-                    if top_cluster.get("mean_expression") is not None
-                    else None
-                ),
-            }
-        )
-
-    summary_json = {
-        "n_genes_integrated": len(condensed),
-        "top_hits": condensed[: args.top_n],
-        "figures": {
-            "heatmap": str(heatmap_path.name),
-            "chip_bar": str(bar_path.name),
-        },
-    }
-    Path(args.out_json).write_text(json.dumps(summary_json, indent=2))
-
-
-def _plot_heatmap(merged: pd.DataFrame, path: Path) -> None:
+def _plot_heatmap(merged: pd.DataFrame, path: Path):
     top_genes = merged.sort_values("padj").head(15)["gene_name"].unique()
     subset = merged[merged["gene_name"].isin(top_genes)]
     if subset.empty:
@@ -112,8 +63,7 @@ def _plot_heatmap(merged: pd.DataFrame, path: Path) -> None:
     plt.savefig(path, dpi=150)
     plt.close()
 
-
-def _plot_bar(merged: pd.DataFrame, path: Path) -> None:
+def _plot_bar(merged: pd.DataFrame, path: Path):
     top = (
         merged.sort_values("padj")
         .drop_duplicates("gene_name")
@@ -139,6 +89,6 @@ def _plot_bar(merged: pd.DataFrame, path: Path) -> None:
     plt.close()
 
 
-if __name__ == "__main__":
-    main()
 
+
+main()

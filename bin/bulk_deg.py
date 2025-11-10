@@ -1,29 +1,19 @@
-#!/usr/bin/env python3
-"""
-Compute differential expression between two conditions using simple statistics.
-"""
-
-from __future__ import annotations
-
 import argparse
-import json
 from pathlib import Path
-from typing import Dict, Iterable
-
+from typing import Dict
 import numpy as np
 import pandas as pd
 from scipy import stats
 from statsmodels.stats.multitest import fdrcorrection
 
 
-def main(argv: Iterable[str] | None = None) -> None:
+def main(argv = None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--expression", required=True, help="TSV gene x sample matrix.")
     parser.add_argument("--metadata", required=True, help="Sample metadata TSV.")
     parser.add_argument("--gtf", required=True, help="Gene annotation GTF.gz for mapping IDs.")
     parser.add_argument("--out-deg", required=True)
     parser.add_argument("--out-toplist", required=True)
-    parser.add_argument("--summary-json", required=True)
     parser.add_argument("--min-logfc", type=float, default=0.5)
     parser.add_argument("--padj-threshold", type=float, default=0.1)
     args = parser.parse_args(list(argv) if argv is not None else None)
@@ -73,18 +63,7 @@ def main(argv: Iterable[str] | None = None) -> None:
     ].copy()
     toplist.to_csv(args.out_toplist, sep="\t", index=False)
 
-    summary = {
-        "group_a": group_a,
-        "group_b": group_b,
-        "n_genes_tested": int(deg.shape[0]),
-        "n_significant": int(toplist.shape[0]),
-        "padj_threshold": args.padj_threshold,
-        "min_log2fc": args.min_logfc,
-    }
-    Path(args.summary_json).write_text(json.dumps(summary, indent=2))
-
-
-def _annotate_gene_names(deg: pd.DataFrame, gtf_path: Path) -> pd.DataFrame:
+def _annotate_gene_names(deg: pd.DataFrame, gtf_path: Path):
     mapping = {}
     with gzip_open(gtf_path, "rt") as handle:
         for line in handle:
@@ -103,8 +82,7 @@ def _annotate_gene_names(deg: pd.DataFrame, gtf_path: Path) -> pd.DataFrame:
     deg.drop(columns=["gene_id_stripped"], inplace=True)
     return deg
 
-
-def _parse_gtf_attributes(field: str) -> Dict[str, str]:
+def _parse_gtf_attributes(field: str):
     entries = {}
     for item in field.strip().split(";"):
         item = item.strip()
@@ -116,7 +94,6 @@ def _parse_gtf_attributes(field: str) -> Dict[str, str]:
         entries[key] = value.strip('"')
     return entries
 
-
 def gzip_open(path: Path, mode: str = "rt"):
     if path.suffix == ".gz":
         import gzip
@@ -125,6 +102,4 @@ def gzip_open(path: Path, mode: str = "rt"):
     return path.open(mode)
 
 
-if __name__ == "__main__":
-    main()
-
+main()

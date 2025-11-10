@@ -1,28 +1,18 @@
-#!/usr/bin/env python3
-"""
-Annotate STAT1 ChIP-seq peaks with overlapping genes using a GTF reference.
-"""
-
-from __future__ import annotations
-
 import argparse
 import gzip
-import json
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, Iterable, List, Tuple
-
+from typing import Dict, List, Tuple
 import pandas as pd
 
 
-def main(argv: Iterable[str] | None = None) -> None:
+def main(argv = None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--peaks", required=True, help="Path to BED (narrowPeak) file.")
     parser.add_argument("--gtf", required=True, help="Path to gene annotation GTF.gz.")
     parser.add_argument("--max-peaks", type=int, default=1000)
     parser.add_argument("--out-annotated", required=True)
     parser.add_argument("--out-genes", required=True)
-    parser.add_argument("--summary-json", required=True)
     args = parser.parse_args(list(argv) if argv is not None else None)
 
     peaks_df = _load_peaks(Path(args.peaks), args.max_peaks)
@@ -42,15 +32,7 @@ def main(argv: Iterable[str] | None = None) -> None:
     )
     agg.to_csv(args.out_genes, sep="\t", index=False)
 
-    summary = {
-        "n_peaks_input": int(len(peaks_df)),
-        "n_genes_with_binding": int(agg.shape[0]),
-        "top_gene": agg.iloc[0].to_dict() if not agg.empty else None,
-    }
-    Path(args.summary_json).write_text(json.dumps(summary, indent=2))
-
-
-def _load_peaks(path: Path, max_peaks: int) -> pd.DataFrame:
+def _load_peaks(path: Path, max_peaks: int):
     cols = [
         "chrom",
         "start",
@@ -73,8 +55,7 @@ def _load_peaks(path: Path, max_peaks: int) -> pd.DataFrame:
     df["peak_id"] = [f"peak_{i:04d}" for i in range(1, len(df) + 1)]
     return df[["peak_id", "chrom", "start", "end", "score"]]
 
-
-def _load_genes(gtf_path: Path) -> Dict[str, List[Tuple[int, int, str, str]]]:
+def _load_genes(gtf_path: Path):
     intervals: Dict[str, List[Tuple[int, int, str, str]]] = defaultdict(list)
     opener = gzip.open if gtf_path.suffix == ".gz" else open
     with opener(gtf_path, "rt") as handle:
@@ -97,8 +78,7 @@ def _load_genes(gtf_path: Path) -> Dict[str, List[Tuple[int, int, str, str]]]:
         intervals[chrom].sort()
     return intervals
 
-
-def _parse_gtf_attributes(field: str) -> Dict[str, str]:
+def _parse_gtf_attributes(field: str):
     attrs: Dict[str, str] = {}
     for item in field.strip().split(";"):
         item = item.strip()
@@ -108,10 +88,9 @@ def _parse_gtf_attributes(field: str) -> Dict[str, str]:
         attrs[key] = value.strip('"')
     return attrs
 
-
 def _annotate(
     peaks: pd.DataFrame, gene_intervals: Dict[str, List[Tuple[int, int, str, str]]]
-) -> pd.DataFrame:
+):
     records: List[Dict[str, object]] = []
     for _, peak in peaks.iterrows():
         chrom = peak["chrom"]
@@ -137,7 +116,5 @@ def _annotate(
                 )
     return pd.DataFrame(records)
 
-
-if __name__ == "__main__":
-    main()
+main()
 

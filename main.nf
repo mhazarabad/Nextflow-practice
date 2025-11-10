@@ -17,7 +17,6 @@ process GET_BULK {
     output:
         path "bulk_expression.tsv", emit: expression
         path "bulk_metadata.tsv", emit: metadata
-        path "bulk_summary.json", emit: summary
 
     script:
     """
@@ -28,7 +27,6 @@ process GET_BULK {
       --conditions '${params.conditions}' \\
       --out-expression bulk_expression.tsv \\
       --out-metadata bulk_metadata.tsv \\
-      --summary-json bulk_summary.json \\
       --cache-dir ${params.cache_dir}
     """
 }
@@ -70,7 +68,6 @@ input:
     output:
         path "bulk_deg.tsv", emit: deg
         path "bulk_toplist.tsv", emit: toplist
-        path "bulk_deg_summary.json", emit: summary
 
     script:
     """
@@ -80,7 +77,6 @@ input:
       --gtf ${gtf_file} \\
       --out-deg bulk_deg.tsv \\
       --out-toplist bulk_toplist.tsv \\
-      --summary-json bulk_deg_summary.json
     """
 }
 
@@ -94,7 +90,6 @@ input:
     output:
         path "chip_peak_annotations.tsv", emit: annotations
         path "chip_gene_targets.tsv", emit: gene_summary
-        path "chip_annotation_summary.json", emit: summary
 
     script:
     """
@@ -104,7 +99,6 @@ input:
       --max-peaks ${params.max_chip_peaks} \\
       --out-annotated chip_peak_annotations.tsv \\
       --out-genes chip_gene_targets.tsv \\
-      --summary-json chip_annotation_summary.json
     """
 }
 
@@ -113,13 +107,11 @@ process GET_SCRNA {
 
     output:
         path "pbmc3k_processed.h5ad", emit: adata
-        path "scrna_download_summary.json", emit: summary
 
     script:
     """
     python ${projectDir}/bin/download_scrna.py \\
       --out-file pbmc3k_processed.h5ad \\
-      --summary-json scrna_download_summary.json
     """
 }
 
@@ -132,7 +124,6 @@ input:
 
     output:
         path "scrna_gene_signature.tsv", emit: signature
-        path "scrna_signature_summary.json", emit: summary
 
     script:
     """
@@ -141,7 +132,6 @@ input:
       --gene-table ${gene_table} \\
       --cluster-key '${params.scrna_cluster_key}' \\
       --out-signature scrna_gene_signature.tsv \\
-      --summary-json scrna_signature_summary.json
     """
 }
 
@@ -155,9 +145,8 @@ input:
 
     output:
         path "multiomic_summary.tsv", emit: summary_table
-        path "multiomic_summary.json", emit: summary_json
-    path "multiomic_heatmap.png", emit: heatmap
-    path "chip_target_bar.png", emit: chip_bar
+        path "multiomic_heatmap.png", emit: heatmap
+        path "chip_target_bar.png", emit: chip_bar
 
     script:
     """
@@ -165,8 +154,7 @@ input:
       --deg ${deg_table} \\
       --chip-genes ${chip_gene_table} \\
       --scrna-signature ${scrna_signature} \\
-      --out-summary multiomic_summary.tsv \\
-      --out-json multiomic_summary.json
+      --out-summary multiomic_summary.tsv
     """
 }
 
